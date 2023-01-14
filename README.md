@@ -1,0 +1,2 @@
+# mydjangoproject
+Python web app
