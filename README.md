@@ -1,2 +1,2 @@
 # mydjangoproject
-Python web app
+Для полноценной работы требуются CSV файл с вакансиями
