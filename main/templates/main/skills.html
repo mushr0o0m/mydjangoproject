@@ -1,0 +1,67 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Навыки {% endblock %}
+
+{% block content %}
+<h1 class="mb-5">Навыки</h1>
+<form class="mb-3" method="get">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-sm-7">
+            <label for="inputYear" class="form-label">Выберете год</label>
+        </div>
+        <div class="col-sm-7">
+            <select class="form-select" id="inputYear" aria-label="Выберете год" name="year">
+              {% for year in years %}
+                {% if year.year_statistics == year_form.year_statistics %}
+                    <option selected value="{{year.year_statistics}}">{{year.year_statistics}}</option>
+                {% else %}
+                    <option value="{{year.year_statistics}}">{{year.year_statistics}}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary" id="openBtn">Показать</button>
+        </div>
+    </div>
+    <div id="inputYearHelpBlock" class="form-text">Вы можете получить статистику о навыках за каждый год.</div>
+  </form>
+<div class="d-flex  mb-3">
+    <table class="table table-bordered me-3">
+        <thead>
+          <tr>
+            <th scope="col">Название навыка</th>
+            <th scope="col">Число повторений в вакансиях за {{year_form.year_statistics}}</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in table_by_year %}
+          <tr>
+            <th scope="row">{{row.0}}</th>
+            <td>{{row.1}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Название навыка</th>
+            <th scope="col">Число повторений в вакансиях за все время</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in table_by_all_year %}
+          <tr>
+            <th scope="row">{{row.0}}</th>
+            <td>{{row.1}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+  <img src="{{ skill_by_all_years.statistic_graph_img.url }}" alt="{{skill_by_all_years.statistic_graph_title}}">
+  <img src="{{ year_form.statistics_graph_skills_by_year_img.url }}" alt="{{year_form.graphic_title}}">
+{% endblock %}

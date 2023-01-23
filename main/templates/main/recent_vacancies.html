@@ -1,0 +1,38 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Недавние вакансии {% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Недавние вакансии </h1>
+<div  class="mb-4"><p class="mb-0 d-inline-block">Данные получены с сайта</p> <a href="https://hh.ru/">hh.ru</a></div>
+{% for id_vacancy, data in vacancies.items %}
+    <div class="alert alert-secondary mb-3" role="alert">
+        <h4>{{ data.name }}</h4>
+        <div class="mb-2">
+            <h6 class="d-inline-block mb-0">Описание вакансии: </h6>
+            <p class="d-inline">{{ data.description|striptags }}</p>
+        </div>
+        <div class="mb-2">
+            <h6 class="d-inline-block mb-0">Необходимые навыки для этой вакансии: </h6>
+            <p class="d-inline">{{ data.key_skills|striptags|default_if_none:"Данные не указаны" }}</p>
+        </div>
+        <div class="mb-2">
+            <h6 class="d-inline-block mb-0">Компания представляющая данную вакансию: </h6>
+            <p class="d-inline">{{ data.employer_name }}</p>
+        </div>
+        <div class="mb-2">
+            <h6 class="d-inline-block mb-0">Оклад: </h6>
+            <p class="d-inline">{{ data.salary }} {{ data.salary_currency }} {{ data.salary_gross }}</p>
+        </div>
+        <div class="mb-2">
+            <h6 class="d-inline-block mb-0">Название региона: </h6>
+            <p class="d-inline">{{ data.area_name }}</p>
+        </div>
+        <div class="mb-2">
+            <h6 class="d-inline-block mb-0">Дата публикации данной вакансии: </h6>
+            <p class="d-inline">{{ data.published_at|date:"d.m.Y H:i:s" }}</p>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

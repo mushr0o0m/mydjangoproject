@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} География {% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">География</h1>
+<div class="d-flex">
+    <table class="table table-bordered me-3">
+        <thead>
+          <tr>
+            <th scope="col">Город</th>
+            <th scope="col">Уровень зарплат</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in tables.0 %}
+          <tr>
+            <th scope="row">{{row.0}}</th>
+            <td>{{row.1}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Город</th>
+            <th scope="col">Доля вакансий</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in tables.1 %}
+          <tr>
+            <th scope="row">{{row.0}}</th>
+            <td>{{row.1}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<img class="mb-3" src="{{ level_salaries_graph.statistic_graph_img.url }}" alt="{{level_salaries_graph.statistic_graph_title}}">
+<img src="{{ share_vacancies_graph.statistic_graph_img.url }}" alt="{{share_vacancies_graph.statistic_graph_title}}">
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Главная страница {% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">{{ page_content.job_title }}</h1>
+    <p class="main__descr mb-5">{{ page_content.job_description }}</p>
+    <figure class="figure">
+      <img class="img-thumbnail main__ill" src="{{ page_content.thematic_img.url }}" alt="Тематическое изображение">
+      <figcaption class="figure-caption">Данные взяты с сайта
+          <a href="https://www.specialist.ru/profession/security-specialist">www.specialist.ru</a>
+      </figcaption>
+    </figure>
+
+{% endblock %}
